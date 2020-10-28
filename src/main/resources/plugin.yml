@@ -1,0 +1,7 @@
+name: IEconomy
+version: @version@
+main: cx.rain.mc.bukkit.ieconomy.IEconomy
+prefix: IEconomy
+authors: [ AmemiyaShigure ]
+description: An economy plugin for Bukkit server.
+website: https://github.com/AmemiyaSigure/IEconomy
