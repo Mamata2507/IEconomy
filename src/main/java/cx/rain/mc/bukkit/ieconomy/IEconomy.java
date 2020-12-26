@@ -1,9 +1,12 @@
 package cx.rain.mc.bukkit.ieconomy;
 
+import cx.rain.mc.bukkit.ieconomy.compat.Vault;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class IEconomy extends JavaPlugin {
     private static IEconomy Instance;
+
+    private Vault vault;
 
     public IEconomy() {
         if (Instance != null) {
@@ -13,16 +16,14 @@ public final class IEconomy extends JavaPlugin {
         Instance = this;
     }
 
-    public static IEconomy getInstance() {
-        return Instance;
-    }
-
     @Override
     public void onEnable() {
         // Plugin startup logic
+        if (getServer().getPluginManager().isPluginEnabled("Vault")) {
+            vault = new Vault();
+        }
 
-
-        getLogger().info("IEconomy is loaded.");
+        getLogger().info("Loading...");
     }
 
     @Override
@@ -31,5 +32,13 @@ public final class IEconomy extends JavaPlugin {
 
 
         getLogger().info("Goodbye!");
+    }
+
+    public static IEconomy getInstance() {
+        return Instance;
+    }
+
+    public Vault getVault() {
+        return vault;
     }
 }
