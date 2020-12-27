@@ -1,6 +1,18 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:5.2.0"
+    }
+}
+
 apply plugin: 'java'
+apply plugin: "com.github.johnrengelman.shadow"
 
 group = 'cx.rain.mc.bukkit'
 version = '1.0.0'
@@ -26,7 +38,8 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT'
-    compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
+    implementation 'com.zaxxer:HikariCP:3.4.5'
+    //compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
 }
 
 processResources {
@@ -34,3 +47,5 @@ processResources {
         filter ReplaceTokens, tokens: [version: version]
     }
 }
+
+jar.finalizedBy(shadowJar)

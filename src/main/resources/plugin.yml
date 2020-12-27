@@ -6,5 +6,3 @@ prefix: IEconomy
 authors: [ AmemiyaShigure ]
 description: An economy plugin for Bukkit server.
 website: https://github.com/AmemiyaSigure/IEconomy
-softdepend:
-  - Vault

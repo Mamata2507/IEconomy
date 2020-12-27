@@ -1,12 +1,14 @@
 package cx.rain.mc.bukkit.ieconomy;
 
-import cx.rain.mc.bukkit.ieconomy.compat.Vault;
+import cx.rain.mc.bukkit.ieconomy.api.IEconomyProvider;
+import cx.rain.mc.bukkit.ieconomy.core.Economy;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class IEconomy extends JavaPlugin {
     private static IEconomy Instance;
 
-    private Vault vault;
+    private IEconomyProvider economy;
 
     public IEconomy() {
         if (Instance != null) {
@@ -19,9 +21,8 @@ public final class IEconomy extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        if (getServer().getPluginManager().isPluginEnabled("Vault")) {
-            vault = new Vault();
-        }
+        getServer().getServicesManager().register(IEconomyProvider.class, Economy.create(),
+                this, ServicePriority.High);
 
         getLogger().info("Loading...");
     }
@@ -36,9 +37,5 @@ public final class IEconomy extends JavaPlugin {
 
     public static IEconomy getInstance() {
         return Instance;
-    }
-
-    public Vault getVault() {
-        return vault;
     }
 }
