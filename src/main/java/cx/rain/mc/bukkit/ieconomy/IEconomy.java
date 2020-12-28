@@ -1,14 +1,18 @@
 package cx.rain.mc.bukkit.ieconomy;
 
+import cx.rain.mc.bukkit.ieconomy.api.IEconomyDataProvider;
 import cx.rain.mc.bukkit.ieconomy.api.IEconomyProvider;
+import cx.rain.mc.bukkit.ieconomy.command.CommandBalance;
 import cx.rain.mc.bukkit.ieconomy.core.Economy;
+import cx.rain.mc.bukkit.ieconomy.data.MySqlProvider;
+import cx.rain.mc.bukkit.ieconomy.utility.I18n;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Locale;
+
 public final class IEconomy extends JavaPlugin {
     private static IEconomy Instance;
-
-    private IEconomyProvider economy;
 
     public IEconomy() {
         if (Instance != null) {
@@ -21,10 +25,16 @@ public final class IEconomy extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        getServer().getServicesManager().register(IEconomyProvider.class, Economy.create(),
+        getLogger().info("Loading...");
+        I18n.loadI18nFile(Locale.SIMPLIFIED_CHINESE);
+
+        getServer().getPluginCommand("balance").setExecutor(new CommandBalance());
+
+        getServer().getServicesManager().register(IEconomyDataProvider.class, new MySqlProvider(),
                 this, ServicePriority.High);
 
-        getLogger().info("Loading...");
+        getServer().getServicesManager().register(IEconomyProvider.class, Economy.create(),
+                this, ServicePriority.High);
     }
 
     @Override
