@@ -1,0 +1,2 @@
+exception:
+  not_player: "&c请使用玩家账号执行该操作！"

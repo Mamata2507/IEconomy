@@ -1,6 +1,5 @@
 package cx.rain.mc.bukkit.ieconomy.command;
 
-import cx.rain.mc.bukkit.ieconomy.utility.I18n;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,7 +9,7 @@ public class CommandBalance implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(I18n.format(I18n.MESSAGES.NotPlayer));
+            //sender.sendMessage(I18n.format(I18n.MESSAGES.NotPlayer));
         }
 
         return true;

@@ -12,7 +12,7 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: "com.github.johnrengelman.shadow"
+//apply plugin: "com.github.johnrengelman.shadow"
 
 group = 'cx.rain.mc.bukkit'
 version = '1.0.0'
@@ -31,15 +31,17 @@ repositories {
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
     maven {
-        name = 'Jitpack' // Used by VaultAPI
+        name = 'Jitpack' // Used by VaultAPI and Qore
         url = 'https://jitpack.io'
     }
 }
 
 dependencies {
-    compileOnly 'org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT'
-    implementation 'com.zaxxer:HikariCP:3.4.5'
-    //compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
+    compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+    //implementation 'com.zaxxer:HikariCP:3.4.5'
+    compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
+
+    implementation 'com.github.AmemiyaSigure:Qore:f5239e077e'
 }
 
 processResources {
@@ -48,4 +50,4 @@ processResources {
     }
 }
 
-jar.finalizedBy(shadowJar)
+//jar.finalizedBy(shadowJar)
