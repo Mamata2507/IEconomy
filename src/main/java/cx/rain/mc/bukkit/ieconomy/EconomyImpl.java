@@ -7,6 +7,12 @@ import org.bukkit.OfflinePlayer;
 import java.util.List;
 
 public class EconomyImpl implements Economy {
+
+
+    public EconomyImpl() {
+
+    }
+
     @Override
     public boolean isEnabled() {
         return false;

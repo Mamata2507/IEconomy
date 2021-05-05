@@ -1,1 +1,11 @@
 language: "zh_cn"
+database:
+  # The type property has available values below:
+  # mysql: Use mysql database, and the property "host", "port", "username", "password", "database" must be valid.
+  # sqlite: Use sqlite file to store data, no property additional should be fill.
+  type: "mysql"
+  host: "localhost"
+  port: 3306
+  username: "root"
+  password: "123456"
+  database: "ieconomy"

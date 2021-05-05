@@ -12,7 +12,7 @@ buildscript {
 }
 
 apply plugin: 'java'
-//apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: "com.github.johnrengelman.shadow"
 
 group = 'cx.rain.mc.bukkit'
 version = '1.0.0'
@@ -41,7 +41,7 @@ dependencies {
     //implementation 'com.zaxxer:HikariCP:3.4.5'
     compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
 
-    implementation 'com.github.AmemiyaSigure:Qore:f5239e077e'
+    compileOnly 'com.github.AmemiyaSigure:Qore:23286b1948'
 }
 
 processResources {
@@ -50,4 +50,10 @@ processResources {
     }
 }
 
-//jar.finalizedBy(shadowJar)
+jar.finalizedBy(shadowJar)
+
+shadowJar {
+    dependencies {
+
+    }
+}
