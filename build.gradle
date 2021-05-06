@@ -3,16 +3,18 @@ import org.apache.tools.ant.filters.ReplaceTokens
 buildscript {
     repositories {
         maven {
-            url "https://plugins.gradle.org/m2/"
+            url = 'https://plugins.gradle.org/m2/'
         }
     }
     dependencies {
         classpath "com.github.jengelman.gradle.plugins:shadow:5.2.0"
+        classpath "gradle.plugin.de.schablinski.gradle.activejdbc:activejdbc-gradle-plugin:1.5.2"
     }
 }
 
 apply plugin: 'java'
-apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'de.schablinski.activejdbc-gradle-plugin'
 
 group = 'cx.rain.mc.bukkit'
 version = '1.0.0'
@@ -36,12 +38,17 @@ repositories {
     }
 }
 
+activejdbc.toolVersion = '2.5-j8'
+
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
-    //implementation 'com.zaxxer:HikariCP:3.4.5'
     compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
 
-    compileOnly 'com.github.AmemiyaSigure:Qore:23286b1948'
+    compileOnly 'com.github.AmemiyaSigure:Qore:eb4179db38'
+
+    compile "org.javalite:activejdbc:2.5-j8"
+
+    activejdbc 'org.scala-lang:scala-library:2.12.6'
 }
 
 processResources {
@@ -54,6 +61,12 @@ jar.finalizedBy(shadowJar)
 
 shadowJar {
     dependencies {
+        exclude dependency('org.apache.logging.log4j:log4j-api:2.13.3')
+        exclude dependency('org.apache.logging.log4j:log4j-core:2.13.3')
+        exclude dependency('org.apache.logging.log4j:log4j-slf4j-impl:2.13.3')
 
+        exclude dependency('org.slf4j:slf4j-api:1.7.30')
+
+        exclude dependency('org.javalite:app-config:2.5-j8')
     }
 }

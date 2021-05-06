@@ -7,8 +7,6 @@ import org.bukkit.OfflinePlayer;
 import java.util.List;
 
 public class EconomyImpl implements Economy {
-
-
     public EconomyImpl() {
 
     }

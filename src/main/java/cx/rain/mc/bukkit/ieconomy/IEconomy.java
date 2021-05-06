@@ -1,9 +1,13 @@
 package cx.rain.mc.bukkit.ieconomy;
 
+import cx.rain.mc.bukkit.ieconomy.data.IEconomyDataBase;
+import cx.rain.mc.bukkit.ieconomy.model.Player;
 import cx.rain.mc.bukkit.ieconomy.utility.I18n;
 import cx.rain.mc.qore.api.QoreApi;
 import cx.rain.mc.qore.api.config.YamlConfig;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.UUID;
 
 public final class IEconomy extends JavaPlugin {
     private static IEconomy INSTANCE;
@@ -11,6 +15,7 @@ public final class IEconomy extends JavaPlugin {
     private final QoreApi qore;
 
     private YamlConfig config;
+    private IEconomyDataBase database;
 
     public IEconomy() {
         super();
@@ -32,7 +37,7 @@ public final class IEconomy extends JavaPlugin {
         // Plugin startup logic
         getLogger().info("Loading...");
 
-
+        database = new IEconomyDataBase();
 
         try {
             Class.forName("io.izzel.arclight.common.mod.ArclightMod");
@@ -45,6 +50,8 @@ public final class IEconomy extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+
+        database.close();
 
         getLogger().info("Goodbye world!");
     }
